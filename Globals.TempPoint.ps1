@@ -89,7 +89,4 @@ foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\Functions\"))
 	. "$($item.FullName)"
 }
 
-foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
-{
-	$item | Remove-Item -Force -Recurse
-}
+

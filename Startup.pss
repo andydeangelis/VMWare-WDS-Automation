@@ -1,17 +1,5 @@
-﻿<File>
-  <FileVersion>2.1</FileVersion>
-  <Assemblies>
-    <Assembly>System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
-    <Assembly>System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</Assembly>
-    <Assembly>System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
-    <Assembly>System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
-    <Assembly>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
-    <Assembly>System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
-    <Assembly>System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
-    <Assembly>System.DirectoryServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
-  </Assemblies>
-  <Code>
-    <![CDATA[#Define a Param block to use custom parameters in the project
+﻿<File version="3.1">
+  <Code><![CDATA[#Define a Param block to use custom parameters in the project
 #Param ($CustomParameter)
 
 function Main {
@@ -39,7 +27,42 @@ function Main {
 	
 	if((Show-MainForm_psf) -eq 'OK')
 	{
-		
+		if (-not(Get-InstalledModule -Name "VMWare.PowerCLI"))
+		{
+			try
+			{
+				Set-ExecutionPolicy Unrestricted -Force
+				Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+				Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+				Install-Module -Name "VMWare.PowerCLI" -Force -Scope AllUsers
+				Install-Module -Name "PSParallel" -Force -Scope AllUsers
+				Write-Host "All required modules successfully installed on" $computer -ForegroundColor Green
+				Import-Module "VMWare.PowerCLI"
+				Import-Module "PSParallel"
+			}
+			catch
+			{
+				
+				Write-Host "Unable to install one or more modules on" $computer "Please install manually or resolve connectivity issues." -ForegroundColor Red
+			}
+		}
+		else
+		{
+			Write-Host "All required modules are already installed. Checking for module updates on $computer." -ForegroundColor Green
+			try
+			{
+				Set-ExecutionPolicy Unrestricted -Force
+				Update-Module -Name "VMWare.PowerCLI" -Force -Confirm:$false -ErrorAction SilentlyContinue
+				Update-Module -Name "PSParallel" -Force -Confirm:$false -ErrorAction SilentlyContinue
+				Import-Module "VMware.PowerCLI"
+				Import-Module "PSParallel"
+				Write-Host "All required modules are up to date on" $computer -ForegroundColor Green
+			}
+			catch
+			{
+				Write-Host "Unable to update one or more modules on $computer. Please install manually or resolve connectivity issues." -ForegroundColor Red
+			}
+		}
 	}
 	
 	$script:ExitCode = 0 #Set the exit code for the Packager
@@ -51,4 +74,14 @@ function Main {
 
 
 ]]></Code>
+  <Assemblies>
+    <Assembly>System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</Assembly>
+    <Assembly>System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <Assembly>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
+    <Assembly>System.DirectoryServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+  </Assemblies>
 </File>
