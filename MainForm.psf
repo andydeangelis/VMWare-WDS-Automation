@@ -1399,7 +1399,7 @@ $buttonEnterCredentials_Click={
 		$global:vcCredential = $null
 		$global:vcenterConnection = $null
 		$global:vcCredential = Get-Credential -ErrorAction Stop
-		Connect-VIServer -Server $vcenterTextbox.Text -Credential $global:vcCredential -ErrorAction Stop | Out-File log.txt
+		Connect-VIServer -Server $vcenterTextbox.Text -Credential $global:vcCredential -ErrorAction Stop
 		$global:vcenterConnection = Get-VIServer -Server $vcenterTextbox.Text -ErrorAction Stop
 		$buttonEnterCredentials.Enabled = $false
 		$pictureboxLoading.Visible = $false
