@@ -89,14 +89,7 @@ foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\Functions\"))
 	. "$($item.FullName)"
 }
 
-if (-not (Get-Item "$ScriptDirectory\logs\" -ErrorAction SilentlyContinue))
+foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
 {
-	New-Item -Path $PSScriptRoot -Name logs -ItemType Directory
-}
-else
-{
-	foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
-	{
-		$item | Remove-Item -Force -Recurse
-	}
+	$item | Remove-Item -Force -Recurse
 }

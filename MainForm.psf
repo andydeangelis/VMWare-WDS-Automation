@@ -1297,7 +1297,8 @@ $buttonFinish_Click={
 }
 
 #region Events and Functions
-$formVMAutomationTool_Load={
+$formVMAutomationTool_Load = {
+	
 	Update-NavButtons
 	
 	$timeZones = Get-TimeZone -ListAvailable | select DisplayName
