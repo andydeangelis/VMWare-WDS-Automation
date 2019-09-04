@@ -1734,7 +1734,7 @@ $buttonBuildVM_Click = {
 		{
 			$global:vmbuilds += @($object)
 			
-			if (-not (Get-Item "$ScriptDirectory\logs")) ( New-Item -Path $PSScriptRoot -Name logs -ItemType Directory )
+			if (-not (Get-Item "$ScriptDirectory\logs")) { New-Item -Path $PSScriptRoot -Name logs -ItemType Directory }
 			
 			$global:vmbuilds | Out-File "$ScriptDirectory\logs\addvm.log"
 			
@@ -1929,6 +1929,9 @@ $comboboxClusters_SelectedIndexChanged={
 	}
 }
 ]]></Code>
+  <Bookmarks />
+  <BreakPoints />
+  <TracePoints />
   <Mode>1</Mode>
   <Assemblies />
 </File>
