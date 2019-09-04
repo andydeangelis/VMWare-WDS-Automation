@@ -1733,9 +1733,6 @@ $buttonBuildVM_Click = {
 		if ($allValuesSet)
 		{
 			$global:vmbuilds += @($object)
-			
-			if (-not (Get-Item "$ScriptDirectory\logs")) ( New-Item -Path $PSScriptRoot -Name logs -ItemType Directory )
-			
 			$global:vmbuilds | Out-File "$ScriptDirectory\logs\addvm.log"
 			
 			If ($comboboxTemplate.Text -like "*2012*R2*")
