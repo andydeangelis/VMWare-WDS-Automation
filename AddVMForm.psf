@@ -1879,7 +1879,12 @@ $comboboxVMHost_SelectedIndexChanged={
 
 $comboboxTemplate_SelectedIndexChanged={
 	
-	If ($comboboxTemplate.Text -like "*2012*R2*")
+	If ($comboboxTemplate.Text -like "*2008*R2*")
+	{
+		$labelOS.Text = "Operating System: Windows Server 2008 R2"
+		$comboboxVSwitch.Enabled = $true
+	}
+	elseif ($comboboxTemplate.Text -like "*2012*R2*")
 	{
 		$labelOS.Text = "Operating System: Windows Server 2012 R2"
 		$comboboxVSwitch.Enabled = $true		

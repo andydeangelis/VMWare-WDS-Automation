@@ -1733,6 +1733,7 @@ $buttonBuildVM_Click = {
 		if ($allValuesSet)
 		{
 			$global:vmbuilds += @($object)
+			
 			$global:vmbuilds | Out-File "$ScriptDirectory\logs\addvm.log"
 			
 			If ($comboboxTemplate.Text -like "*2012*R2*")

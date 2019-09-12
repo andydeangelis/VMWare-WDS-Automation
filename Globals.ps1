@@ -91,7 +91,7 @@ foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\Functions\"))
 
 if (-not (Get-Item "$ScriptDirectory\logs\" -ErrorAction SilentlyContinue))
 {
-	New-Item -Path $PSScriptRoot -Name logs -ItemType Directory
+	New-Item -Path $ScriptDirectory -Name logs -ItemType Directory
 }
 else
 {
