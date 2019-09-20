@@ -26,5 +26,6 @@
     <File Build="0" ReferenceFunction="Show-AddVirtualDisk_psf">AddVirtualDisk.psf</File>
     <File Build="0" ReferenceFunction="Show-AddNicCard_psf">AddNicCard.psf</File>
     <File Build="0" ReferenceFunction="Show-SetHostname_psf">SetHostname.psf</File>
+    <File Build="0" ReferenceFunction="Show-RenameAdminAccount_psf">RenameAdminAccount.psf</File>
   </Files>
 </Project>

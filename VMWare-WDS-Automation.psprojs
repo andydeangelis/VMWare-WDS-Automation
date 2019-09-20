@@ -13,5 +13,7 @@
     <File>GetAdminPassword.psf</File>
     <File>WorkgroupDomainJoin.psf</File>
     <File>AddNicCard.psf</File>
+    <File>RenameAdminAccount.psf</File>
+    <File>AddVMForm.psf</File>
   </OpenFiles>
 </ProjectState>

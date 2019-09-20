@@ -89,7 +89,14 @@ foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\Functions\"))
 	. "$($item.FullName)"
 }
 
-foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
+if (-not (Get-Item "$ScriptDirectory\logs\" -ErrorAction SilentlyContinue))
 {
-	$item | Remove-Item -Force -Recurse
+	New-Item -Path $ScriptDirectory -Name logs -ItemType Directory
+}
+else
+{
+	foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
+	{
+		$item | Remove-Item -Force -Recurse
+	}
 }
