@@ -65,7 +65,7 @@ $vmWorkgroupDomain = [System.Collections.ArrayList]@()
 $vmFullOSConfig = [System.Collections.ArrayList]@()
 
 #VM full OS config
-$vmTimeZones = [System.Collections.ArrayList]@()
+$vmTimeZones = "085"
 
 #Step 3 Selected VM
 [string]$vmSelectedStep3
@@ -81,6 +81,9 @@ $vmAdditionalNICs = [System.Collections.ArrayList]@()
 
 #VM Additional NICs
 $vmOSKeys = [System.Collections.ArrayList]@()
+
+# VM Admin Account Rename
+$vmAdminAccount = $null
 
 # Import all functions.
 

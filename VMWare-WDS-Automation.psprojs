@@ -10,10 +10,8 @@
     <File>Globals.ps1</File>
     <File>AddVirtualDisk.psf</File>
     <File>MainForm.psf</File>
-    <File>GetAdminPassword.psf</File>
-    <File>WorkgroupDomainJoin.psf</File>
+    <File>Functions\ActivateWindows.ps1</File>
+    <File>AddLocalUsers.psf</File>
     <File>AddNicCard.psf</File>
-    <File>RenameAdminAccount.psf</File>
-    <File>AddVMForm.psf</File>
   </OpenFiles>
 </ProjectState>
