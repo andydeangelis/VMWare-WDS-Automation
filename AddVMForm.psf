@@ -1684,7 +1684,7 @@ $buttonBuildVM_Click = {
 		{
 			$global:vmbuilds += @($object)
 			
-			$global:vmbuilds | Out-File "$ScriptDirectory\logs\addvm.log"
+			$global:vmbuilds | Out-File "$logDirectory\addvm.log"
 			
 			If ($comboboxTemplate.Text -like "*2012*R2*")
 			{
@@ -1882,6 +1882,7 @@ $comboboxClusters_SelectedIndexChanged={
 		Update-ComboBox -combobox $comboboxVMHost -Items $hosts.Name
 	}
 }
+
 ]]></Code>
   <Mode>1</Mode>
   <Assemblies />

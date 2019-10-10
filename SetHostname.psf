@@ -721,7 +721,7 @@ $buttonOK_Click={
 		
 		$global:vmWorkgroupDomain = [System.Array]$global:vmWorkgroupDomain + $domainObject
 		
-		$global:vmWorkgroupDomain | Out-File "$ScriptDirectory\logs\hostnames.log"
+		$global:vmWorkgroupDomain | Out-File "$logDirectory\hostnames.log"
 		
 		$labelOK1.Visible = $true
 		

@@ -53,7 +53,7 @@ $vmDomainInfo = [System.Collections.ArrayList]@()
 $vmOS = [System.Collections.ArrayList]@()
 
 #VM Local Admin Passwords
-$vmAdminPasswords = [System.Collections.ArrayList]@()
+$vmAdminPasswords = ""
 
 #VM Additional User Accounts
 $vmLocalUsers = [System.Collections.ArrayList]@()
@@ -64,7 +64,7 @@ $vmWorkgroupDomain = [System.Collections.ArrayList]@()
 #VM full OS config
 $vmFullOSConfig = [System.Collections.ArrayList]@()
 
-#VM full OS config
+#VM TimeZone
 $vmTimeZones = "085"
 
 #Step 3 Selected VM

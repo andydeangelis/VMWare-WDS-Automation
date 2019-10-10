@@ -1239,8 +1239,9 @@ function Test-WizardPage
 	}
 	elseif ($tabPage -eq $tabpageStep6)
 	{
+		$datetime = get-date -Format "MMddyyy_mmhhss"
 		$string = ""
-		if (Get-ChildItem -Path "$ScriptDirectory\logs\test.html" -ErrorAction Ignore) { Remove-Item "$ScriptDirectory\logs\test.html" -Force}		
+		if (Get-ChildItem -Path "$logDirectory\build_$datetime.html" -ErrorAction Ignore) { Remove-Item "$logDirectory\build_$datetime.html" -Force}		
 		foreach ($vm in $global:vmBuilds)
 		{
 			#$string = "<b>This is my test page.</b>"
@@ -1253,14 +1254,36 @@ function Test-WizardPage
 							&nbsp;&nbsp;&nbsp;<b>Datastore:</b> $($vm.Datastore)<br>
 							&nbsp;&nbsp;&nbsp;<b>CPU Count:</b> $($vm.NumCPU)<br>
 							&nbsp;&nbsp;&nbsp;<b>Memory:</b> $($vm.Memory)<br>
-							&nbsp;&nbsp;&nbsp;<b>Network:</b> $($vm.Network)<br>
 							&nbsp;&nbsp;&nbsp;<b>Template:</b> $($vm.Template)<br>
 							&nbsp;&nbsp;&nbsp;<b>Location:</b> $($vm.Location)<br>
 					"
 			
+			$domain = $global:vmWorkgroupDomain | ?{ $_.VMName -eq $vm.VMName }
+			
+			$string = $string + "&nbsp;&nbsp;&nbsp;<b>Hostname:</b> $($domain.Hostname)<br>"
+			$string = $string + "&nbsp;&nbsp;&nbsp;<b>Domain/Workgroup:</b> $($domain.DomainName)<br>"
+			
+			$roles = $global:vmRoles | ?{ $_.VMName -eq $vm.VMName }
+			
+			if ($roles -ne '')
+			{
+				$string = $string + "&nbsp;&nbsp;&nbsp;<b>Roles:</b><br>"
+				
+				foreach ($role in $roles.Roles)
+				{
+					$string = $string + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$role<br>"
+				}
+			}
+			
 			$vmKeyTemp = $global:vmOSKeys | ?{ $_.VMName -eq $vm.VMName }
 			
-			if ($vmKeyTemp.UseKMS -eq "Yes")
+			$tzArray = Import-Csv "$ScriptDirectory\reference\timezones.csv"
+			
+			$tz = ($tzArray | ?{ $_.TimeZoneCode -eq $global:vmTimeZones}).Description
+			
+			$string = $string + "&nbsp;&nbsp;&nbsp;<b>Time Zone:</b> $tz<br>"
+			
+			if ($vmKeyTemp.UseKMS -eq 'Yes')
 			{
 				$string = $string + "&nbsp;&nbsp;&nbsp;<b>License Type:</b> Using KMS<br>"
 			}
@@ -1276,23 +1299,64 @@ function Test-WizardPage
 			{
 				$string = $string + "
 										&nbsp;&nbsp;&nbsp;<b>IP Type:</b> $($vm."IP Type")<br>
-										&nbsp;&nbsp;&nbsp;<b>IP Address:</b> $($vm."IP Address")<br>
-										&nbsp;&nbsp;&nbsp;<b>Subnet Mask:</b> $($vm."Subnet Mask")<br>
-										&nbsp;&nbsp;&nbsp;<b>Default Gateway:</b> $($vm."Default Gateway")<br>
-										&nbsp;&nbsp;&nbsp;<b>Primary DNS Server:</b> $($vm."Primary DNS Server")<br>
-										</font>
-									</p>
-								"
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Network:</b> $($vm.Network)<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>IP Address:</b> $($vm."IP Address")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Subnet Mask:</b> $($vm."Subnet Mask")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Default Gateway:</b> $($vm."Default Gateway")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Primary DNS Server:</b> $($vm."Primary DNS Server")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Secondary DNS Server:</b> $($vm."Secondary DNS Server")<br>
+										"
 			}
 			else
 			{
-				$string = $string + "&nbsp;&nbsp;&nbsp;<b>IP Type:</b> $($vm."IP Type")<br></font></p>"
+				$string = $string + "&nbsp;&nbsp;&nbsp;<b>IP Type:</b> $($vm."IP Type")<br>"
+				$string = $string + "&nbsp;&nbsp;&nbsp;<b>Network:</b> $($vm.Network)<br>"
 			}
 			
-			ConvertTo-Html -Body $string | Out-File "$ScriptDirectory\logs\test.html" -Append
+			$disks = $global:vmAdditionalDisks | ?{ $_.VMName -eq $vm.VMName }
+			
+			
+			foreach ($disk in $disks)
+			{
+				$string = $string + "&nbsp;&nbsp;&nbsp;<b>Additional Disk:</b> $($disk.DriveLetter) - $($disk.DriveSize)GB <br>"				
+			}
+			
+			foreach ($nic in ($global:vmAdditionalNICs | ?{ $_.VMName -eq $vmName }))
+			{
+				if ($nic."IP Type" -eq "Static")
+				{
+					$string = $string + "
+										&nbsp;&nbsp;&nbsp;<b>Additional NIC:</b> $($nic."IP Type")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Network:</b> $($nic.VLAN)<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>IP Address:</b> $($nic."IP Address")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Subnet Mask:</b> $($nic."Subnet Mask")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Default Gateway:</b> $($nic."Default Gateway")<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Primary DNS Server:</b> $($nic."Primary DNS Server")<br>
+										"
+				}
+				else
+				{
+					$string = $string + "
+										&nbsp;&nbsp;&nbsp;<b>Additional NIC:</b> $($nic."IP Type")<br>"					
+				}
+			}
+			
+			if ($global:vmLocalUsers -ne '')
+			{
+				$string = $string + "&nbsp;&nbsp;&nbsp;<b>Additional Users:</b><br>"
+				
+				foreach ($user in $global:vmLocalUsers)
+				{
+					$string = $string + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$($user.Username)<br>"
+				}
+			}
+			
+			$string = $string + "</font></p>"
+			
+			ConvertTo-Html -Body $string | Out-File "$logDirectory\build_$datetime.html" -Append
 		}
 			
-		$webbrowserVMBuildSummary.Url = "$ScriptDirectory\logs\test.html"
+		$webbrowserVMBuildSummary.Url = "$logDirectory\build_$datetime.html"
 		
 		return $true
 	}
@@ -2064,7 +2128,7 @@ $buttonAddVirtualMachine_Click={
 
 $buttonOpenRolesSelection_Click={
 	
-	$global:vmSelectedStep4 | Out-File "$ScriptDirectory\logs\vmselectedstep4.log" -Append
+	$global:vmSelectedStep4 | Out-File "$logDirectory\vmselectedstep4.log" -Append
 	
 	if ((Show-WindowsRoles_psf -VMName $global:vmSelectedStep4) -eq 'OK')
 	{
@@ -2088,6 +2152,25 @@ $buttonBuildAndConfigureVMs_Click={
 		{
 			while (@(Get-Job | ?{ $_.State -eq "Running" }).Count -ge 5)
 			{
+				# We're going to iterate through the running jobs and kill any that have been running for X minutes.
+				# This block is ignored if there are less than 5 total builds. We'll handle that part later.
+				
+				foreach ($job in (Get-Job))
+				{
+					$runTime = ((Get-Date) - $job.PSBeginTime).Minutes
+					if ($runtime -gt 30)
+					{
+						try
+						{
+							Stop-Job $job.Name -Confirm:$false
+						}
+						catch
+						{
+							"Unable to stop job."
+						}
+					}
+				}
+				
 				Write-Host "Waiting for open thread...($NumJobs Maximum)"
 				Start-Sleep -Seconds 3
 			}
@@ -2111,37 +2194,45 @@ $buttonBuildAndConfigureVMs_Click={
 			$osConfigObject | Add-Member -MemberType NoteProperty -Name "Disks" -Value ($global:vmAdditionalDisks | ?{ $_.VMName -eq $vm.VMName })
 			$osConfigObject | Add-Member -MemberType NoteProperty -Name "NICs" -Value ($global:vmAdditionalNICs | ?{ $_.VMName -eq $vm.VMName })
 			$osConfigObject | Add-Member -MemberType NoteProperty -Name "OSKeys" -Value ($global:vmOSKeys | ?{ $_.VMName -eq $vm.VMName })
-			$osConfigObject | Add-Member -MemberType NoteProperty -Name "AdminAccount" -Value $global:vmAdminAccount
 			$osConfigObject | Add-Member -MemberType NoteProperty -Name "TimeZone" -Value $global:vmTimeZones
+			
+			if ($global:vmAdminAccount -ne "")
+			{
+				$osConfigObject | Add-Member -MemberType NoteProperty -Name "AdminAccount" -Value $global:vmAdminAccount
+			}
+			else
+			{
+				$osConfigObject | Add-Member -MemberType NoteProperty -Name "AdminAccount" -Value ""
+			}
 			
 			$global:vmFullOSConfig = [System.Array]$global:vmFullOSConfig + $osConfigObject
 			
-			$osConfigObject | Out-File "$ScriptDirectory\logs\osobject.log" -Append
+			$osConfigObject | Out-File "$logDirectory\osobject.log" -Append
 			
 			# Define and start the build job for the VM.
 			
-			Start-Job -Name $vm.VMName -ArgumentList $vcenterTextbox.Text, $global:vcCredential, $vm, $ScriptDirectory, $osConfigObject -ScriptBlock {
+			Start-Job -Name $vm.VMName -ArgumentList $vcenterTextbox.Text, $global:vcCredential, $vm, $ScriptDirectory, $osConfigObject, $logDirectory -ScriptBlock {
 				. "$($args[3])\Functions\Get-FolderbyPath.ps1"
 				
 				Import-Module VMware.PowerCLI
 				
-				Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -ParticipateInCeip $false -DisplayDeprecationWarnings $false -Confirm:$false
+				Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -ParticipateInCeip $false -DisplayDeprecationWarnings $false -Confirm:$false -ErrorAction Stop
 				
-				Connect-VIServer -Server $args[0] -Credential $args[1]
+				Connect-VIServer -Server $args[0] -Credential $args[1] -ErrorAction Stop
 				
 				if ($args[4].IsWorkgroup -eq 'No')
 				{
+					
 					$password = ConvertTo-SecureString "$($args[4].DomainPassword)" -AsPlainText -Force
 					$domainCredential = New-Object System.Management.Automation.PSCredential ("$($args[4].DomainUser)", $password)
-				
+					
 					$osSpec = New-OSCustomizationSpec -OSType "Windows" -Name $args[2].VMName -Type NonPersistent `
 													  -FullName "Administrator" `
 													  -AdminPassword "$($args[4].LocalAdminPassword)" `
-													  -AutoLogonCount 2 `
+													  -AutoLogonCount 1 `
 													  -OrgName "Org1" `
 													  -Description "Temporary Spec for $($args[2].VMName)" `
 													  -ChangeSid `
-													  -DeleteAccounts `
 													  -Domain "$($args[4].DomainName)" `
 													  -DomainCredentials $domainCredential `
 													  -NamingScheme fixed `
@@ -2152,14 +2243,14 @@ $buttonBuildAndConfigureVMs_Click={
 				}
 				else
 				{
+					
 					$osSpec = New-OSCustomizationSpec -OSType "Windows" -Name $args[2].VMName -Type NonPersistent `
 													  -FullName "Administrator" `
 													  -AdminPassword "$($args[4].LocalAdminPassword)" `
-													  -AutoLogonCount 2 `
+													  -AutoLogonCount 1 `
 													  -OrgName "Org1" `
 													  -Description "Temporary Spec for $($args[2].VMName)" `
 													  -ChangeSid `
-													  -DeleteAccounts `
 													  -Workgroup "$($args[4].DomainName)" `
 													  -NamingScheme fixed `
 													  -NamingPrefix $args[4].Hostname `
@@ -2168,9 +2259,11 @@ $buttonBuildAndConfigureVMs_Click={
 					
 				}
 				
+				
 				if ($args[2].("IP Type") -eq "DHCP")
 				{
-					Get-OSCustomizationNicMapping -OSCustomizationSpec $osSpec | Set-OSCustomizationNicMapping -IpMode UseDHCP
+					
+					Get-OSCustomizationNicMapping -OSCustomizationSpec $osSpec | Set-OSCustomizationNicMapping -IpMode UseDHCP -ErrorAction Stop					
 				}
 				else
 				{
@@ -2178,7 +2271,8 @@ $buttonBuildAndConfigureVMs_Click={
 																											   -IpAddress $args[2].("IP Address") `
 																											   -SubnetMask $args[2].("Subnet Mask") `
 																											   -DefaultGateway $args[2].("Default Gateway") `
-																											   -Dns $args[2].("Primary DNS Server"), $args[2].("Secondary DNS Server")
+																											   -Dns $args[2].("Primary DNS Server"), $args[2].("Secondary DNS Server") `
+																											   -ErrorAction Stop				
 				}
 				
 				$vmTemplate = Get-Template -Name $args[2].Template
@@ -2200,7 +2294,7 @@ $buttonBuildAndConfigureVMs_Click={
 				
 				do
 				{
-					Start-Sleep -Seconds 5
+					Start-Sleep -Seconds 1
 					$vmstatus = (Get-VM -Name "$($args[2].VMName)").extensionData.Guest.interactiveGuestOperationsReady
 					Write-Host $vmStatus -ForegroundColor Red
 				}
@@ -2208,12 +2302,15 @@ $buttonBuildAndConfigureVMs_Click={
 				
 				Write-Host $vmStatus -ForegroundColor Green
 				
-				# Now that our VM is built, let's finish customizing it. We'll start by setting the local Administrator password.
+				#Get-VM $args[2].VMName -ErrorAction Stop | Restart-VMGuest -Confirm:$false -ErrorAction Stop
+				
+				# Now that our VM is built, let's finish customizing it. We'll start by creating the credential object to run Invoke-VMScript.
 				
 				$vmAdminPass = $args[4].LocalAdminPassword
 				
+				$localAdmin = "Administrator"
 				$password = ConvertTo-SecureString $args[4].LocalAdminPassword -AsPlainText -Force
-				$localAdminCred = New-Object System.Management.Automation.PSCredential ("Administrator", $password)
+				$localAdminCred = New-Object System.Management.Automation.PSCredential ($localAdmin, $password)
 				
 				# Declare the array that will house each command to run.
 				
@@ -2264,7 +2361,7 @@ $buttonBuildAndConfigureVMs_Click={
 					$object = New-Object PSObject
 					$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Install-WindowsFeature -Name $role -IncludeManagementTools"
 					$customizeOSScripts = [System.Array]$customizeOSScripts + $object
-				}				
+				}
 				
 				# Now, we add, format and partition additional specified disks.
 				
@@ -2274,11 +2371,11 @@ $buttonBuildAndConfigureVMs_Click={
 					$driveLabel = "Drive-$($disk.DriveLetter)"
 					$driveSize = [int]($disk.DriveSize)
 					$confirm = '$false'
-					New-HardDisk -VM $args[2].VMName -CapacityGB $driveSize -Persistence persistent -Confirm:$false
+					New-HardDisk -VM $args[2].VMName -CapacityGB $driveSize -Persistence persistent -Confirm:$false -ErrorAction Stop
 					$object = New-Object PSObject
 					$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-Disk | Where-Object PartitionStyle -eq ""RAW"" | Initialize-Disk -PartitionStyle GPT -PassThru | New-Partition -DriveLetter $driveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel $driveLabel -Confirm:$confirm"
 					#$customizeOSScripts = [System.Array]$customizeOSScripts + $object
-					Invoke-VMScript -VM $args[2].VMName -GuestCredential $localAdminCred -ScriptText "$($object.Command)"
+					Invoke-VMScript -VM $args[2].VMName -GuestCredential $localAdminCred -ScriptText "$($object.Command)" -ErrorAction Stop
 				}
 				
 				# Let's customize additional network adapters.
@@ -2304,13 +2401,31 @@ $buttonBuildAndConfigureVMs_Click={
 						if ($newGateway -ne '')
 						{
 							$object = New-Object PSObject
-							$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-NetAdapter |  Where-Object MacAddress -eq ""$macAddress"" | New-NetIPAddress -IPAddress $newIP -DefaultGateway $newGateway -PrefixLength $cidrNotation | Set-DNSClientServerAddress -ServerAddresses $newDNSServer"
+							
+							if ($newDNSServer -ne '')
+							{
+								$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-NetAdapter |  Where-Object MacAddress -eq ""$macAddress"" | New-NetIPAddress -IPAddress $newIP -DefaultGateway $newGateway -PrefixLength $cidrNotation | Set-DNSClientServerAddress -ServerAddresses $newDNSServer"
+							}
+							else
+							{
+								$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-NetAdapter |  Where-Object MacAddress -eq ""$macAddress"" | New-NetIPAddress -IPAddress $newIP -DefaultGateway $newGateway -PrefixLength $cidrNotation"
+							}
+							
 							$customizeOSScripts = [System.Array]$customizeOSScripts + $object
 						}
 						else
 						{
 							$object = New-Object PSObject
-							$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-NetAdapter |  Where-Object MacAddress -eq ""$macAddress"" | New-NetIPAddress -IPAddress $newIP -DefaultGateway $newGateway -PrefixLength $cidrNotation | Set-DNSClientServerAddress -ServerAddresses $newDNSServer"
+							
+							if ($newDNSServer -ne '')
+							{
+								$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-NetAdapter |  Where-Object MacAddress -eq ""$macAddress"" | New-NetIPAddress -IPAddress $newIP -PrefixLength $cidrNotation | Set-DNSClientServerAddress -ServerAddresses $newDNSServer"
+							}
+							else
+							{
+								$object | Add-Member -MemberType NoteProperty -Name "Command" -Value "Get-NetAdapter |  Where-Object MacAddress -eq ""$macAddress"" | New-NetIPAddress -IPAddress $newIP -PrefixLength $cidrNotation"
+							}
+							
 							$customizeOSScripts = [System.Array]$customizeOSScripts + $object
 						}
 						
@@ -2349,51 +2464,106 @@ $buttonBuildAndConfigureVMs_Click={
 					}
 				}
 				
+				if ($args[4].AdminAccount -ne "")
+				{
+					$newAdminCommand = "Get-LocalUser Administrator | Rename-LocalUser -NewName $($args[4].AdminAccount)"
+					
+					$object = New-Object PSObject
+					$object | Add-Member -MemberType NoteProperty -Name "Command" -Value $newAdminCommand
+					
+					$customizeOSScripts = [System.Array]$customizeOSScripts + $object
+				}
+				
 				# Let's output the commands to verify.
-				$customizeOSScripts | Out-File "$($args[3])\logs\scriptsarray_$($args[2].VMName).log"
+				$customizeOSScripts | Out-File "$($args[5])\scriptsarray_$($args[2].VMName).log"
 				
 				# Now, we run all the customization commands.
 				
 				foreach ($script in $customizeOSScripts)
 				{
-					$script.Command | Out-File "$($args[3])\logs\$($args[2].VMName)_scriptcommand.log" -Append
-					Invoke-VMScript -VM $args[2].VMName -GuestCredential $localAdminCred -ScriptText "$($script.Command)" | Out-File "$($args[3])\logs\$($args[2].VMName)_scriptcommand.log" -Append
+					$script.Command | Out-File "$($args[5])\$($args[2].VMName)_scriptcommand.log" -Append
+					Invoke-VMScript -VM $args[2].VMName -GuestCredential $localAdminCred -ScriptText "$($script.Command)" -ErrorAction Ignore | Out-File "$($args[5])\$($args[2].VMName)_scriptcommand.log" -Append
 					
-					sleep -Seconds 3
 				}
 				
-				Get-VM $args[2].VMName | Restart-VMGuest -Confirm:$false
-				
-				Disconnect-VIServer -Server $args[0] -Force -Confirm:$false
+				Disconnect-VIServer -Server $args[0] -Force -Confirm:$false -ErrorAction Stop
+			
 				
 			} # End job block
 			
 		}
 		
-		# Let's wait for all the build jobs to finish.
+		# Let's wait for all the build jobs to finish. We'll also kill any jobs that have been running for longer than X minutes.
+		# For each job returned that has not completed, we'll check to see if it has been running longer than X minutes. If it has, kill the job.
 		
 		do
 		{
 			Start-Sleep -Milliseconds 1000
+			
+			foreach ($job in (Get-Job))
+			{
+				$runTime = ((Get-Date) - $job.PSBeginTime).Minutes
+				if ($runtime -gt 30)
+				{
+					try
+					{
+						Stop-Job $job.Name -Confirm:$false
+					}
+					catch
+					{
+						"Unable to stop job."
+					}
+				}
+			}
+			
 		}
 		while ((Get-Job -State Running).Count -gt 0)
 		
-		# Output the job results to a separate log file for each VM.
+		$datetime = Get-Date -Format "MMddyyyy_HHmmss"
 		
-		$datetime = Get-Date -Format "MM/dd/yyyy_HH:mm"
-		$jobs = Get-Job
+		# Get the completed jobs.
+		$jobs = Get-Job | ?{ $_.State -eq "Completed" }
 		
+		# Get the failed jobs.
+		$failedJobs = Get-Job | ?{ $_.State -ne "Completed" }
+		
+		# Output the job results to a separate log file for each VM.		
 		$data = @()
 		
 		foreach ($job in $jobs)
 		{
 			$data += Get-Job $job.Name | Receive-Job
 			Remove-Job $job
+			
+			Get-VM $job.Name | Restart-VMGuest -Confirm:$false
 		}
 		
-		$data | Out-File "$ScriptDirectory\logs\jobtext.log" -Append
+		$failedData = @()
 		
-		#[System.Windows.Forms.MessageBox]::Show("All requested virtual machines are available.")
+		foreach ($failedJob in $failedJobs)
+		{
+			$failedData += Get-Job $failedJob.Name | Receive-Job
+			Remove-Job $failedJob
+			
+			Get-VM $job.VMName | Stop-VM -RunAsync -Confirm:$false
+			
+			do { Start-Sleep -Milliseconds 500 }
+			while ((Get-VM $job.Name).PowerState -eq "PoweredOff")
+			
+			Remove-VM $job.Name -RunAsync -DeletePermanently -Confirm:$false
+		}
+		
+		$data | Out-File "$logDirectory\jobtext.log" -Append
+		
+		if (-not $failedData)
+		{
+			[System.Windows.Forms.MessageBox]::Show("All requested virtual machines are available.")
+		}
+		else
+		{
+			$failedData | Out-File "$logDirectory\failedjobtext.log" -Append
+			[System.Windows.Forms.MessageBox]::Show("The following virtual machine builds failed: $failedData")
+		}
 		
 	}
 	catch
@@ -2401,43 +2571,11 @@ $buttonBuildAndConfigureVMs_Click={
 		[System.Windows.Forms.MessageBox]::Show("Unable to build virtual machines.")
 	}
 	
-	# Now, we will rename the local admin account.
-	
-	$password = ConvertTo-SecureString $global:vmAdminPasswords -AsPlainText -Force
-	$localAdminCred = New-Object System.Management.Automation.PSCredential ("Administrator", $password)
-	
-	foreach ($vm in $global:vmbuilds)
-	{
-		$vmstatus = (Get-VM -Name $vm.VMName).extensionData.Guest.interactiveGuestOperationsReady
-		
-		do
-		{
-			Start-Sleep -Seconds 1
-			$vmstatus = (Get-VM -Name $vm.VMName).extensionData.Guest.interactiveGuestOperationsReady
-		}
-		while ($vmStatus -ne $True)
-		
-		if ($global:vmAdminAccount)
-		{
-			$newAdminName = $global:vmAdminAccount
-			
-			$renameCommand = "Get-LocalUser Administrator | Rename-LocalUser -NewName $newAdminName"
-			$renameCommand | Out-File "$ScriptDirectory\logs\$($vm.VMName)_scriptcommand.log" -Append
-			
-			Invoke-VMScript -VM $vm.VMName -GuestCredential $localAdminCred -ScriptText "Get-LocalUser Administrator | Rename-LocalUser -NewName $newAdminName" -ErrorAction Continue
-		}
-		
-		do
-		{
-			Start-Sleep -Seconds 1
-			$vmstatus = (Get-VM -Name $vm.VMName).extensionData.Guest.interactiveGuestOperationsReady
-		}
-		while ($vmStatus -ne $True)
-		
-		Get-VM $vm.VMName | Restart-VMGuest -Confirm:$false
-	}
-	
-	[System.Windows.Forms.MessageBox]::Show("All requested virtual machines are available.")
+	$datetime = Get-Date -Format "MMddyyyy_HH_mm_ss"
+	$userName = $env:USERNAME
+	[string]$archiveName = "vmbuild__$userName_$datetime.zip"
+	Compress-Archive -Path $logDirectory -DestinationPath "$logParentDirectory\$archiveName" -Verbose
+	Remove-Item -Path $logDirectory -Recurse -Confirm:$false
 }
 
 $datagridviewVMQueue_CellContentClick=[System.Windows.Forms.DataGridViewCellEventHandler]{
@@ -2496,7 +2634,7 @@ $buttonDeleteVMFromQueue_Click={
 		$vmOSKeys = [System.Collections.ArrayList]@()
 		$vmAdminAccount = $null
 		
-		foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
+		foreach ($item in (Get-ChildItem -Path "$logDirectory"))
 		{
 			$item | Remove-Item -Force -Recurse
 		}
@@ -2574,7 +2712,7 @@ $comboboxTimezone_SelectedIndexChanged={
 	
 	$global:vmTimeZones = (Import-Csv "$ScriptDirectory\reference\timezones.csv" | ? { $_.Description -eq $comboboxTimezone.Text }).TimeZoneCode
 	
-	$global:vmTimeZones | Out-File "$ScriptDirectory\logs\tz.log"
+	$global:vmTimeZones | Out-File "$logDirectory\tz.log"
 		
 }
 
@@ -2675,6 +2813,7 @@ $radiobuttonKMSKey_CheckedChanged={
 		$buttonProductKey.Enabled = $true
 	}
 }
+
 ]]></Code>
   <Mode>1</Mode>
   <Assemblies />

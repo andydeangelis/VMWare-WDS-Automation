@@ -1667,7 +1667,7 @@ $buttonBuildVM_Click = {
 		}
 		else
 		{
-			$props = Get-Member -InputObject $object -MemberType NoteProperty | ?{($_.Name -ne "IP Address") -and ($_.Name -ne "Subnet Mask") -and ($_.Name -ne "Default Gateway") -and ($_.Name -ne "Primary DNS Server") -and ($_.Name -ne "Secondary DNS Server")}
+			$props = Get-Member -InputObject $object -MemberType NoteProperty | ?{($_.Name -ne "IP Address") -and ($_.Name -ne "Subnet Mask") -and ($_.Name -ne "Default Gateway") -and ($_.Name -ne "Primary DNS Server") }
 			
 			foreach ($prop in $props)
 			{

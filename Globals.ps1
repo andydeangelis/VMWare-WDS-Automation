@@ -31,6 +31,14 @@ function Get-ScriptDirectory
 #Sample variable that provides the location of the script
 [string]$ScriptDirectory = Get-ScriptDirectory
 
+# Set the log directory.
+[string]$docsDirectory = [Environment]::GetFolderPath('MyDocuments')
+$logGUID = New-Guid
+[string]$logParentDirectory = "$docsDirectory\vmware_automation_logfiles"
+[string]$logDirectory = "$docsDirectory\vmware_automation_logfiles\$logGUID"
+
+if (-not (Get-Item -Path $logGUID)) { New-Item -ItemType Directory -Path "$logParentDirectory" -Name $logGUID}
+
 #Credential object for vCenter authentication.
 $vcCredential = $null
 
@@ -90,16 +98,4 @@ $vmAdminAccount = $null
 foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\Functions\"))
 {
 	. "$($item.FullName)"
-}
-
-if (-not (Get-Item "$ScriptDirectory\logs\" -ErrorAction SilentlyContinue))
-{
-	New-Item -Path $ScriptDirectory -Name logs -ItemType Directory
-}
-else
-{
-	foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\logs\"))
-	{
-		$item | Remove-Item -Force -Recurse
-	}
 }
