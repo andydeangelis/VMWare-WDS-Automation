@@ -61,7 +61,7 @@ $vmDomainInfo = [System.Collections.ArrayList]@()
 $vmOS = [System.Collections.ArrayList]@()
 
 #VM Local Admin Passwords
-$vmAdminPasswords = ""
+$vmAdminPasswords
 
 #VM Additional User Accounts
 $vmLocalUsers = [System.Collections.ArrayList]@()
@@ -73,7 +73,7 @@ $vmWorkgroupDomain = [System.Collections.ArrayList]@()
 $vmFullOSConfig = [System.Collections.ArrayList]@()
 
 #VM TimeZone
-$vmTimeZones = "085"
+$vmTimeZones
 
 #Step 3 Selected VM
 [string]$vmSelectedStep3
@@ -92,6 +92,12 @@ $vmOSKeys = [System.Collections.ArrayList]@()
 
 # VM Admin Account Rename
 $vmAdminAccount = $null
+
+# Post Install Scripts
+$postInstallScripts = @()
+
+# Temp array for domain/workgroup info.
+$vmDomainWorkgroupStep5 = @()
 
 # Import all functions.
 

@@ -692,8 +692,7 @@ N/SvLPnvXw13NAbx7lUgnJX/ZL9rz0W2jiZyvepNZD3hCKiFBCHu6c3ijZ15E6/RRjPbI+Mg77Yn
 2b6WunLnwgPx3UAP6wkjFgtw8CGgPc3lZE/Aj6fYct6/O8deTw1H0UuyqeuSXYVoPDgN+WS6Pf+3
 ccu5PQSD3gbR4NYD0pcUY5zsG8aHmFyrnYekWfdm5SoW3oRs4Rmm7sWwf4T0apsFHz/RNPvs5czR
 bNyp4pGbnIrilNWlbNZT4tAcXO+3eK5js9fwPRXrAy12bbF6NdFfyC2s5rILAAA=</Form>
-  <Code><![CDATA[
-param
+  <Code><![CDATA[param
 (
 	[Parameter(Mandatory = $true)]
 	[string]$VMName
@@ -701,7 +700,10 @@ param
 
 $SetHostname_Load={
 	
-	
+	if ($VMName -in $global:vmWorkgroupDomain.VMName)
+	{
+		$maskedtextboxHostname.Text = ($global:vmWorkgroupDomain | ? {$_.VMName -eq $VMName}).Hostname
+	}
 }
 
 $buttonOK_Click={

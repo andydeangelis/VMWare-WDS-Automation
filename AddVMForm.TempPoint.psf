@@ -1246,6 +1246,9 @@ $formAddVM_Load={
 	# Define the VM build queue variable.
 	#$vmBuildQueue = @()
 	
+	# Define template list.
+	$templates = @()
+	
 }
 
 #region Control Helper Functions
@@ -1684,7 +1687,7 @@ $buttonBuildVM_Click = {
 		{
 			$global:vmbuilds += @($object)
 			
-			$global:vmbuilds | Out-File "$ScriptDirectory\logs\addvm.log"
+			$global:vmbuilds | Out-File "$logDirectory\addvm.log"
 			
 			If ($comboboxTemplate.Text -like "*2012*R2*")
 			{
@@ -1784,7 +1787,39 @@ $comboboxVMHost_SelectedIndexChanged={
 	
 	#Update the Template list
 	
-	$templates = Get-Template -Server $global:vcenterConnection.Name
+	$localTemplates = (Get-Template -Server $global:vcenterConnection.Name -ErrorAction SilentlyContinue)
+	
+	if ($localTemplates)
+	{
+		foreach ($item in $localTemplates)
+		{
+			$object = New-Object PSObject
+			$object | Add-Member -MemberType NoteProperty -Name "Name" -Value $item.Name
+			$object | Add-Member -MemberType NoteProperty -Name "Location" -Value "vcenter"
+			
+			$templates = [System.Array]$templates + $object
+		}
+	}
+	
+	$contLibTemplates = (Get-ContentLibraryItem -Server $global:vcenterConnection.Name -ErrorAction SilentlyContinue | ?{ ($_.ItemType -eq "ovf") -or ($_.ItemType -eq "ova") })
+	
+	if ($contLibTemplates)
+	{
+		foreach ($item in $contLibTemplates)
+		{
+			$object = New-Object PSObject
+			$object | Add-Member -MemberType NoteProperty -Name "Name" -Value $item.Name
+			$object | Add-Member -MemberType NoteProperty -Name "Location" -Value "library"
+			
+			$templates = [System.Array]$templates + $object
+		}
+	}
+	
+	#$templates = [System.Array]$templates + $object
+	
+	$templates = $templates | Sort-Object Name
+	
+	$templates | Export-CSV "$logDirectory\templates.log" -NoTypeInformation
 	
 	try
 	{
@@ -1882,6 +1917,7 @@ $comboboxClusters_SelectedIndexChanged={
 		Update-ComboBox -combobox $comboboxVMHost -Items $hosts.Name
 	}
 }
+
 ]]></Code>
   <Mode>1</Mode>
   <Assemblies />

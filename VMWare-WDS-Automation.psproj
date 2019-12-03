@@ -32,5 +32,9 @@
     <File Build="0" Shared="False" ReferenceFunction="Invoke-Get-WebRequestTable_ps1">Functions\Get-WebRequestTable.ps1</File>
     <File Build="0" ReferenceFunction="Show-EnterKMSKey_psf">EnterKMSKey.psf</File>
     <File Build="0" Shared="False" ReferenceFunction="Invoke-Get-Hash_ps1">Functions\Get-Hash.ps1</File>
+    <File Build="0" ReferenceFunction="Show-AddPostInstallScripts_psf">AddPostInstallScripts.psf</File>
+    <File Build="0" ReferenceFunction="Show-SelectVMTemplate_psf">SelectVMTemplate.psf</File>
+    <File Build="0" Shared="False" ReferenceFunction="Invoke-Get-TaskPlus_ps1">Functions\Get-TaskPlus.ps1</File>
+    <File Build="2">Modules\ContentLibrary.psm1</File>
   </Files>
 </Project>

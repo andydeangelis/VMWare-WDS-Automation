@@ -175,18 +175,19 @@ SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
 SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
 SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSSpZv/AL/z8E
 BDeVr96byAAAAABJRU5ErkJggg==</Preview>
-  <Form>LcRH1KKcZQkAACODCAAAAAAABAC1Vdtu2kAQfa/Uf1j5oU8W90tQwVK4pKkKDQKXPqLFnsCW9S7aXQfo13ew
-oSSxweYhAlkYz5lzdubMuP20+AOe0c7nT4S04xti9hvoWNO9NhAUfjPhy60uPEgVxFebpD2yyQyU
-ZlJ0aoXS4WOTXshNqKAjIDSKcpuMwwVn3g/Yu3INorNoNmndqzfKrWoNSnctiwgaIPMz5psCRyl9
-aqg2UoFFvBXjvkKU1ZPCKMm1FYlG2WMlN6DM/gi/D42cepRDnwUgDpIwtGGTcrVdPIVmQUfSB8t5
-QKZMTI8zEGbK/iKgflezSbVRyQSNqFoyEck6fjMhP/FqOSm1yURODVVmLDUzWAvL6aFcUGOKxcw+
-nQs7YzkxI7lCOXjBbEfMUFI/Ven88KRdjGJPwGzPHeDfFPNnDLYf7j0fyZZI9oJk/3Xra/ZLcRHn
-cvtLg3Llve9PUCZaiXKdLNtVbB+LZ+BGuPBWUlmOKzc26UpjJI7rEJ6NTSZsuUr2O5liKD0aG6Vc
-waFJejnFzVhsFvc6v9TYz+n1zgGfAPWfBN/jWVWYhw8L6UKw4dTAuXXJsEc41MlyqsltgcHZNHEZ
-sH7HFRJyjszxv3ng8R5poIWrpVYOgEsX34UPO8tJ7dTruewB5yMZauhLHAbAxeWtL3Vgnhb8dnTf
-Z5c8DMQjtgVUBMzInxr+bjkU4+2Qf1d0Q7S8+PAtsYhoBjtmbtwMx/E8TebtM1lrNdEZlWbuATtL
-ze2+Zt0mlVT7X/ReOU909CoZfKHB5ms+ObgHezLY4NHRgQf4BJBOMbHMPfWYYsZ0SPnU7Dl0qbdG
-40Ub8gL+jaVjB59LOM8y6aub00/t/ANVzWLtZQkAAA==</Form>
+  <Form>ZiR918AxMgoAACODCAAAAAAABAC1VU1P20AQvVfqf1j50JMF5JuoiSVwoFRAiZIUjmhjD8mW9W60uwbcX9+x
+12mAOPFyQImsOJ4383bmzfPgZv4HIqODr18IGdgbYrIVDL1ppg0kB3dMxPJZH5xLldirT6oe+eQW
+lGZSDNsHR/nHJ2HKTapgKCA1inKfjNM5Z9ElZDP5CGI47/VoJ+p0G/1WG46O+x4RNMHKD5hvChyp
+jKih2kgFHomWjMcKUV4ohVGSa68gjbTHSq5AmayEn6RGTiPKYcQSEDklDO36pNEaHK5D66DXMgYv
+OMdKtZiQMxBmyv4ioHPc9kmr26wFXVO1YKKgVX5rIb/w6gUVvalFTg1VZiw1M9gLLwiRLqgxxWbW
+n24GL8YLbEWyp+TZE2YrMVeSxpVM7/Mng8Midg2s11wO/6FYfMvg+dO1F2OxBRZ7wmL/eet98qtQ
+Eefy+bcGNZMncTxBmiglyvV22/ZiR9g8Ax+Ei2gplRfM5Monp9IYiet6BQ/GJxO2WG7Pe8cOoJpD
+ydNE6HITGOcO2CsZUSuyRhMXbnsPKjYBB8WsTtyPaXehelYO8AnQ+EbwDPukUpd6OIQLxKDIbplm
+cw7uVDfQOxabZd5Z29J1n3HQTK84zSAuA92yziBBlIGNDrfDLiAfuhe0tq0Pg+vL2LngQEsVpJxj
+ZfuvC9yaYhf3sXXUdwDM6PyniOHFCyql89pkQuD8WqYaRhI3G9CFo8ddkrivCn7rQ++zF+K38yiA
+Nfkrw9853aG1OnfjO01xf8WnW968KHP2wswHba70mrXNuBrMxiTa/R4qo9lz3vgNVWf19To+aVbK
+f6f2Gi7RxXvx7BtNVt/d6KCphzJZ4dFRgTl8AlhOMbFwtiFMgf6TUj41GYdTGj2i8Aq734F/I2mr
+4E0L7+tE+upm/VMH/wCACOacMgoAAA==</Form>
   <Code><![CDATA[
 #region Control Helper Functions
 function Update-DataGridView
@@ -389,6 +390,8 @@ $formSelectDatastore_Load = {
 	
 	$datastores = Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name | ?{ $_.State -eq 'Available' } | select Name, FreeSpaceGB, CapacityGB | Sort-Object -Property Name
 	
+	#$datastoreClusters = Get-DatastoreCluster -Server $global:vcenterConnection.Name
+	
 	#$datastores | Export-Csv "$ScriptDirectory\export.csv" -NoTypeInformation
 	
 	$table = ConvertTo-DataTable -InputObject $datastores
@@ -452,11 +455,23 @@ $datagridviewDatastores_ColumnHeaderMouseClick=[System.Windows.Forms.DataGridVie
 
 $datagridviewDatastores_CellMouseDoubleClick=[System.Windows.Forms.DataGridViewCellMouseEventHandler]{
 #Event Argument: $_ = [System.Windows.Forms.DataGridViewCellMouseEventArgs]
-	#TODO: Place custom script here
-	$textboxDatastore.Text = $datagridviewDatastores.CurrentRow.Cells[0].Value
+	
+	$dsCluster = (Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name -Name $datagridviewDatastores.CurrentRow.Cells[0].Value | Get-DatastoreCluster).Name
+	
+	if ($dsCluster)
+	{
+		$textboxDatastore.Text = $dsCluster
+	}
+	else
+	{
+		$textboxDatastore.Text = $datagridviewDatastores.CurrentRow.Cells[0].Value
+	}
+	
+	$buttonSelectTemplate.Enabled = $true
+	
 	$formSelectDatastore.Close()
 }
 ]]></Code>
-  <Mode>1</Mode>
+  <Mode>0</Mode>
   <Assemblies />
 </File>
