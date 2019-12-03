@@ -75,6 +75,9 @@ $vmFullOSConfig = [System.Collections.ArrayList]@()
 #VM TimeZone
 $vmTimeZones
 
+#Existing VM List
+$existingVMList = [System.Collections.ArrayList]@()
+
 #Step 3 Selected VM
 [string]$vmSelectedStep3
 
