@@ -14,5 +14,6 @@
     <File>AddVMForm.psf</File>
     <File>DuplicateVM.psf</File>
     <File>AddVirtualDisk.psf</File>
+    <File>SelectDatastore.psf</File>
   </OpenFiles>
 </ProjectState>

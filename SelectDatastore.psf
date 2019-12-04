@@ -388,13 +388,21 @@ function ConvertTo-DataTable
 
 $formSelectDatastore_Load = {
 	
+	$dsList = @()
+	
 	$datastores = Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name | ?{ $_.State -eq 'Available' } | select Name, FreeSpaceGB, CapacityGB | Sort-Object -Property Name
 	
-	#$datastoreClusters = Get-DatastoreCluster -Server $global:vcenterConnection.Name
+	foreach ($ds in $datastores)
+	{
+		$object = New-Object PSObject
+		$object | Add-Member -MemberType NoteProperty -Name Name -Value $ds.Name
+		$object | Add-Member -MemberType NoteProperty -Name FreeSpaceGB -Value ([math]::Round(($ds.FreeSpaceGB), 2))
+		$object | Add-Member -MemberType NoteProperty -Name CapacityGB -Value ([math]::Round(($ds.CapacityGB), 2))
+			
+		$dsList = $dsList + $object		
+	}
 	
-	#$datastores | Export-Csv "$ScriptDirectory\export.csv" -NoTypeInformation
-	
-	$table = ConvertTo-DataTable -InputObject $datastores
+	$table = ConvertTo-DataTable -InputObject $dsList
 	
 	Update-DataGridView -DataGridView $datagridviewDatastores -Item $table -AutoSizeColumns DisplayedCells
 	
@@ -472,6 +480,6 @@ $datagridviewDatastores_CellMouseDoubleClick=[System.Windows.Forms.DataGridViewC
 	$formSelectDatastore.Close()
 }
 ]]></Code>
-  <Mode>0</Mode>
+  <Mode>1</Mode>
   <Assemblies />
 </File>

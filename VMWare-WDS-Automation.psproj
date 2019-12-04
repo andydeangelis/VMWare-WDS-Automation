@@ -35,7 +35,6 @@
     <File Build="0" ReferenceFunction="Show-AddPostInstallScripts_psf">AddPostInstallScripts.psf</File>
     <File Build="0" ReferenceFunction="Show-SelectVMTemplate_psf">SelectVMTemplate.psf</File>
     <File Build="0" Shared="False" ReferenceFunction="Invoke-Get-TaskPlus_ps1">Functions\Get-TaskPlus.ps1</File>
-    <File Build="2">Modules\ContentLibrary.psm1</File>
     <File Build="0" ReferenceFunction="Show-DuplicateVM_psf">DuplicateVM.psf</File>
   </Files>
 </Project>

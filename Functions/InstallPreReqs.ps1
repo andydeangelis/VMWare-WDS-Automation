@@ -15,23 +15,21 @@ function Install-PreReqs
 {
 	try
 	{
-		# Check if the PSWindowsUpdate PoSH module is installed. If it is not, install it.
+		# Check if the PowerCLI PoSH module is installed. If it is not, install it.
 		
 		if (-not (Get-InstalledModule -Name "VMware.PowerCLI" -ErrorAction SilentlyContinue))
 		{
 			try
 			{
 				Set-ExecutionPolicy Unrestricted -Force
-				Write-Host "Installing PSWindowsUpdate and PendingReboot modules on" $computer -ForegroundColor Yellow
+				Write-Host "Installing PowerCLI and PendingReboot modules on" $computer -ForegroundColor Yellow
 				Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 				Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
-				Install-Module -Name "VMWare.PowerCLI" -Force -Scope AllUsers
-				Install-Module -Name "PendingReboot" -Force -Scope AllUsers
+				Install-Module -Name "VMWare.PowerCLI" -MaximumVersion 11.5.0.14912921 -Force -Scope AllUsers
 				Write-Host "All required modules successfully installed." -ForegroundColor Green
 				Import-Module VMware.PowerCLI
 				Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
-				Set-PowerCLIConfiguration -ParticipateInCeip $false -Scope AllUsers -Confirm:$false
-				Import-Module PendingReboot
+				Set-PowerCLIConfiguration -ParticipateInCeip $false -Scope AllUsers -Confirm:$false				
 			}
 			catch
 			{
@@ -39,19 +37,17 @@ function Install-PreReqs
 				Write-Host "Unable to install one or more modules. Please install manually or resolve connectivity issues." -ForegroundColor Red
 			}
 		}
-		else
+		elseif (-not (Get-InstalledModule -Name "VMware.PowerCLI" -MinimumVersion 11.5.0.14912921 -ErrorAction SilentlyContinue))
 		{
-			Write-Host "All required modules are already installed. Checking for module updates." -ForegroundColor Green
+			Write-Host "All required modules are already installed, but less than the required version. Checking for module updates." -ForegroundColor Green
 			try
 			{
 				Set-ExecutionPolicy Unrestricted -Force
-				Update-Module -Name "VMware.PowerCLI" -Force -Confirm:$false -ErrorAction SilentlyContinue
-				Update-Module -Name "PendingReboot" -Force -Confirm:$false -ErrorAction SilentlyContinue
+				Update-Module -Name "VMware.PowerCLI" -Force -Confirm:$false -MaximumVersion 11.5.0.14912921 -ErrorAction SilentlyContinue
 				Write-Host "All required modules are up to date." -ForegroundColor Green
 				Import-Module VMWare.PowerCLI
 				Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 				Set-PowerCLIConfiguration -ParticipateInCeip $false -Scope AllUsers -Confirm:$false
-				Import-Module PendingReboot
 			}
 			catch
 			{

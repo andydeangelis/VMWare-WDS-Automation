@@ -1277,18 +1277,13 @@ hMzUxKckEH0S81ESBZB+G7Zd/tEf/A+MsIMY4XEAAA==</Form>
 	
 	# Retrieve all virtual datacenters from vSphere.
 	
-	$datacenters = Get-Datacenter -Server $global:vcenterConnection.Name
+	$datacenters = Get-Datacenter -Server $global:vcenterConnection.Name | Sort-Object
 	
 	foreach ($datacenter in $datacenters)
 	{
 		try
 		{
-			$hosts = Get-VMHost -Location $datacenter.Text
-			
-			if ($hosts -ne $null)
-			{
-				Update-ComboBox -Combobox $comboboxDatacenter -items $datacenter.Name
-			}
+			Update-ComboBox -Combobox $comboboxDatacenter -items $datacenter.Name			
 		}
 		catch
 		{
@@ -1671,6 +1666,8 @@ $buttonBuildVM_Click = {
 	
 	$vmTemp = ($global:vmBuilds).VMName
 	
+	$global:existingVMList = (Get-VM).Name
+	
 	# Here we build our paramters from the data provided.
 	if (($textboxVMName.Text -notin $global:existingVMList) -and ($textboxVMName.Text -notin $vmTemp))
 	{
@@ -1815,7 +1812,6 @@ $buttonBuildVM_Click = {
 			}
 			else
 			{
-				#$formAddVM.Close()
 				[System.Windows.Forms.MessageBox]::Show("All fields must be completed to continue.")
 			}
 			
@@ -1823,11 +1819,13 @@ $buttonBuildVM_Click = {
 		catch
 		{
 			[System.Windows.Forms.MessageBox]::Show("Unable to add VM to queue.")
+			$formAddVM.Close()
 		}
 	}
 	else
 	{
 		[System.Windows.Forms.MessageBox]::Show("VM: $($textboxVMName.Text) already exists in queue or in environment.")
+		$formAddVM.Close()
 	}
 }
 
@@ -1835,7 +1833,7 @@ $comboboxDatacenter_SelectedIndexChanged={
 	
 	if ($comboboxDatacenter.Text -ne '')
 	{
-		$clusters = Get-Cluster -Location $comboboxDatacenter.Text
+		$clusters = Get-Cluster -Location $comboboxDatacenter.Text | Sort-Object
 		
 		if ($clusters.Name -ne $null)
 		{
@@ -1901,7 +1899,7 @@ $checkboxStaticIP_CheckedChanged={
 
 $comboboxClusters_SelectedIndexChanged={
 	
-	$hosts = Get-VMHost -Location $comboboxClusters.Text
+	$hosts = Get-VMHost -Location $comboboxClusters.Text | Sort-Object
 	
 	if ($hosts.Name -ne $null)
 	{

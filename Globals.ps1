@@ -28,6 +28,8 @@ function Get-ScriptDirectory
 	}
 }
 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted -Force
+
 #Sample variable that provides the location of the script
 [string]$ScriptDirectory = Get-ScriptDirectory
 
@@ -107,4 +109,9 @@ $vmDomainWorkgroupStep5 = @()
 foreach ($item in (Get-ChildItem -Path "$ScriptDirectory\Functions\"))
 {
 	. "$($item.FullName)"
+}
+
+if (-not (Get-ChildItem "$logParentDirectory\prereqsinstalled.log" -ErrorAction SilentlyContinue))
+{
+	Install-PreReqs | Out-File "$logParentDirectory\prereqsinstalled.log"
 }
