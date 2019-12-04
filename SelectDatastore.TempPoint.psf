@@ -1,0 +1,477 @@
+﻿<File version="3.1">
+  <FileID>2556e5c8-c928-4c37-b6d3-ea932def1840</FileID>
+  <Preview>iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACZmSURBVHhe7d1pcF3neeD5pJJMpebLfOgPqUp1
+pWa6ptNpV3fbTifxJJkuJx1PZ6Yz7q44HXdPJ95luyeO09bE2rzEthbLsixZlixZC2VJJEWQALgD
+3AECIPaFIIl9IwEQIAEu4irJliw/874HpERCsC3JpC3x/P5Vv4J47z3n3nNB8X3OvRfkL0iSJEmS
+JEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmS
+JEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmS
+JEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmS
+JEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmS
+JEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEklrTmZ/JVf+ZXJf/Wv/uXkxz7ykcnrrvs4APAW
+8MlPfGLyj9797slf/uVfnvzFX/zFybSmjxWr+0/ql37pl+Z+4zd+I97/l38Zd919bzS29cbo5LHC
+yKF5AOBNanTqePSPTsWqNdXxoQ99KH7zn/7TSCf0cWGJ/4lN/mVa/KvW10T3yNFo2HcoGnonAIC3
+gN17J6J7dC4amrviEx//ePzqr/7qCxfW9x/fv/wX/2Lyjjvvjp60+O/eOx4NSf4KALz55XW7rmcs
+9o4fi4qq9fEHv//7r20A+MhHPjK5u2Vv7Nk/GY1pkgAA3nrqe8ZjZOpYfO6Wz7+2AeDjH//45MHZ
+Z6IpDwD7DgIAb0H5rYCZE8+nAeALr30AmEwDQH4FoCntAAB468mfB5iePx833/y51z4AHJo9Gc0H
+ptIQcAgArriWvqloH5yJjqGrp23gcFrLJov7y1/bBqaXvN2Vko+npf+VtfNnfYyL5VcBpo/lAeCW
+1zMAPJMe+HSxUwC4kvLCuLN9KJ5a2xjLVtfFsjX1V17ab9W2ztizb2Ehzgvi2u1dC/e3eonb/7TS
+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
+AACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQ
+QgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAA
+ACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQM
+AABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABK
+yAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAA
+oIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJAB
+AABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJ
+GQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAA
+lJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIA
+AEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACgh
+AwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACA
+EjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYA
+ACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVk
+AACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQ
+QgYAACghAwAAlJABAABKyAAAACVkAACAEjIAAEAJGQAAoIQMAABQQgYAACghAwAAlJABAABKyAAA
+ACVkAACAEjIAAEAJGQAAoIQMAABQQm/ZAaC2tjaqq6sBgDcgr6fvec973joDQJ5Y3vGOd8TmzZuj
+srISAHgDtm3bFu9+97vjgQceePMPAC+88EK0trbGr/3ar8U73/nOePvb3w4AvAG//du/Hb/+678e
+K1eujB/+8IdLrrsX/dwHgDNnzsTJkydjZGQkDhw4EH19fQDAG5DX0eHh4Th27Fixvi617l70cx8A
+svwgn3/+eQDgCjh79uyS6+2l3hQDAADws2UAAIASMgAAcM3KL4WfO3euVH7Se/8XGQAAuCblhXB+
+fj4OHz5cKidOnHhNQ4ABAIBr0vnz56OhoSG2bNkSu3btuubV1dXFxo0bo7e3N5577rkln5NLGQAA
+uCbll8N3794dg4ODMTs7u+TZ8rXk6NGj0dHREV1dXQYAAMorDwD5FYCBgYFigZyamrriptN+Z9Jw
+kQeMBTNxeHp6idtOLyzUS153ZeT7b29vj+7ubgMAAOX1sxgApiYnYnR4MPr7+qO/PxkYjJGJQzE9
+fentpmN68mCMjo7GaL7u8EwcOTIT05fu5wowAABAcnUHgJk4duZQ7Lj3hvg//vk74vf+4Pfjf3vX
+u+Jd//bP4+bKrnhmfvaV287MxamR+vjKbXfGPZv3xpHZ8ThwYDgOXra/n54BAACSqz0AHD8/HKs/
+84W46brHovPIwRju74++/oEYm55L938q5mbSmf+RY2kdPBVH038fTmf+R4/MxsCeJ+NTn1kew/NH
+Y+YKviVgAACA5KoPAOeGYvX1t8ddt2yN4xHx4nPPx/e//1xMtFTEXd94OHb1zcZ0b0189evfjIau
+fbF5c21s79kXNff8Vbz9nf8xbqtsiemj6TZL7v/1MwAAQHL1B4CJ2PQPn45/97Y/ivf99f8T//n9
+/zk+ev3noqp2S9zyV38YNzz+ZDx185/GH193W3S31MRff/Bj8ekV9bH9gQ/GO9753vjK6uaYmpuN
+w0vu//UzAABAcvUHgLFYd8uN8cE//VR8fdl34oH77osHly2Pzsnn48xMTXzpvf86/vmfXR9t089F
+TNTGh6/7m7ihojMO9qyKv/n0k94CAICr4WfxFkDF9XfE3V/YGWci9YMfxIvf/17x1w+fmtwSf/uv
+/0n8oz/471F/OF07sSU+UgwAHTHc/Fh87FPLYiANALMGAAC4sq72AHDi/Gis+cxn4q/f89/j25Ur
+44lly2LZ8hVRuWFNfOW6P43r73o0HvvqX8QHPvtgDLSui7/6wEfj0yvaY6LzsfiLf/PJeHRDWxw8
+6i0AALiiru4AcDiOnpiKtjX3xSf//D/Gf3jve+O9yf/9X/5LfPJvPhGf/odHo/PYC/HSia5Ydstt
+saW1K5Y/tTwer+uL2cndcef7PhB/e8vq6D9+NGaW3P/rZwAAgOTqDgBTMTk5FTNzx+LUmTPFP76T
+vfjCC7Fzx874b5+8Lj701/81/utffSiu++Qn4sMf/GCsXr06nj3zTNp2Nk6kxfeZE0djenLyVft9
+owwAAJBc7QFgKXNzc8V93n333a+ydevW4vqltrsSDAAAkPw8BoDJdEaf/1GepR5PXvzz9UttdyUY
+AAAguTgADA8PF4tyXiCvZfPz89HZ2WkAAKDczp8/X/w7+fmfBM4LY/6ncq9l+Z8B3rJli38OGIBy
+yz+PPzIyUiz+eVHMZ8bXsnyM+Vjz2wH51Y+lnpNLGQAAuGblVwHy2XCZvJbFPzMAAEAJGQAAoIQM
+AABQQgYAACghAwAAlJABAABKyAAAACVkAACAErrqA8C5dAf5TgCAN4/zZ0/H9NUYALKR2bPFdAEA
+vPmMHcmL/lUYALI8WQAAbz6XLv7ZFR0AAIC3BgMAAJTQGxsAjp2L4SPPFRsDAG89AzPn49i5l177
+APDRj35s5tS5F+Pk+SgmBwDgref42Zfiey9F3HTTzT+8sMT/+P78z983dtNNt7yQNnghTw0AwFvR
+zS/cfMvnXnj/+9//7IUlXpIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
+SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
+SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
+SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
+SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSSpZv/AL/z8E
+BDeVr96byAAAAABJRU5ErkJggg==</Preview>
+  <Form>ZiR918AxMgoAACODCAAAAAAABAC1VU1P20AQvVfqf1j50JMF5JuoiSVwoFRAiZIUjmhjD8mW9W60uwbcX9+x
+12mAOPFyQImsOJ4383bmzfPgZv4HIqODr18IGdgbYrIVDL1ppg0kB3dMxPJZH5xLldirT6oe+eQW
+lGZSDNsHR/nHJ2HKTapgKCA1inKfjNM5Z9ElZDP5CGI47/VoJ+p0G/1WG46O+x4RNMHKD5hvChyp
+jKih2kgFHomWjMcKUV4ohVGSa68gjbTHSq5AmayEn6RGTiPKYcQSEDklDO36pNEaHK5D66DXMgYv
+OMdKtZiQMxBmyv4ioHPc9kmr26wFXVO1YKKgVX5rIb/w6gUVvalFTg1VZiw1M9gLLwiRLqgxxWbW
+n24GL8YLbEWyp+TZE2YrMVeSxpVM7/Mng8Midg2s11wO/6FYfMvg+dO1F2OxBRZ7wmL/eet98qtQ
+Eefy+bcGNZMncTxBmiglyvV22/ZiR9g8Ax+Ei2gplRfM5Monp9IYiet6BQ/GJxO2WG7Pe8cOoJpD
+ydNE6HITGOcO2CsZUSuyRhMXbnsPKjYBB8WsTtyPaXehelYO8AnQ+EbwDPukUpd6OIQLxKDIbplm
+cw7uVDfQOxabZd5Z29J1n3HQTK84zSAuA92yziBBlIGNDrfDLiAfuhe0tq0Pg+vL2LngQEsVpJxj
+ZfuvC9yaYhf3sXXUdwDM6PyniOHFCyql89pkQuD8WqYaRhI3G9CFo8ddkrivCn7rQ++zF+K38yiA
+Nfkrw9853aG1OnfjO01xf8WnW968KHP2wswHba70mrXNuBrMxiTa/R4qo9lz3vgNVWf19To+aVbK
+f6f2Gi7RxXvx7BtNVt/d6KCphzJZ4dFRgTl8AlhOMbFwtiFMgf6TUj41GYdTGj2i8Aq734F/I2mr
+4E0L7+tE+upm/VMH/wCACOacMgoAAA==</Form>
+  <Code><![CDATA[
+#region Control Helper Functions
+function Update-DataGridView
+{
+	<#
+	.SYNOPSIS
+		This functions helps you load items into a DataGridView.
+
+	.DESCRIPTION
+		Use this function to dynamically load items into the DataGridView control.
+
+	.PARAMETER  DataGridView
+		The DataGridView control you want to add items to.
+
+	.PARAMETER  Item
+		The object or objects you wish to load into the DataGridView's items collection.
+	
+	.PARAMETER  DataMember
+		Sets the name of the list or table in the data source for which the DataGridView is displaying data.
+
+	.PARAMETER AutoSizeColumns
+	    Resizes DataGridView control's columns after loading the items.
+	#>
+	Param (
+			[ValidateNotNull()]
+			[Parameter(Mandatory = $true)]
+			[System.Windows.Forms.DataGridView]$DataGridView,
+			[ValidateNotNull()]
+			[Parameter(Mandatory = $true)]
+			$Item,
+			[Parameter(Mandatory = $false)]
+			[string]$DataMember,
+			[System.Windows.Forms.DataGridViewAutoSizeColumnMode]$AutoSizeColumns = 'None'
+	)
+	$DataGridView.SuspendLayout()
+	$DataGridView.DataMember = $DataMember
+	
+	if ($Item -is [System.Data.DataSet] -and $Item.Tables.Count -gt 0)
+	{
+		$DataGridView.DataSource = $Item.Tables[0]
+	}
+	elseif ($Item -is [System.ComponentModel.IListSource]`
+			-or $Item -is [System.ComponentModel.IBindingList] -or $Item -is [System.ComponentModel.IBindingListView])
+	{
+		$DataGridView.DataSource = $Item
+	}
+	else
+	{
+		$array = New-Object System.Collections.ArrayList
+		
+		if ($Item -is [System.Collections.IList])
+		{
+			$array.AddRange($Item)
+		}
+		else
+		{
+			$array.Add($Item)
+		}
+		$DataGridView.DataSource = $array
+	}
+	
+	if ($AutoSizeColumns -ne 'None')
+	{
+		$DataGridView.AutoResizeColumns($AutoSizeColumns)
+	}
+	
+	$DataGridView.ResumeLayout()
+}
+
+function ConvertTo-DataTable
+{
+	<#
+		.SYNOPSIS
+			Converts objects into a DataTable.
+	
+		.DESCRIPTION
+			Converts objects into a DataTable, which are used for DataBinding.
+	
+		.PARAMETER  InputObject
+			The input to convert into a DataTable.
+	
+		.PARAMETER  Table
+			The DataTable you wish to load the input into.
+	
+		.PARAMETER RetainColumns
+			This switch tells the function to keep the DataTable's existing columns.
+		
+		.PARAMETER FilterWMIProperties
+			This switch removes WMI properties that start with an underline.
+	
+		.EXAMPLE
+			$DataTable = ConvertTo-DataTable -InputObject (Get-Process)
+	#>
+	[OutputType([System.Data.DataTable])]
+	param (
+			[ValidateNotNull()]
+			$InputObject,
+			[ValidateNotNull()]
+			[System.Data.DataTable]$Table,
+			[switch]$RetainColumns,
+			[switch]$FilterWMIProperties)
+	
+	if ($null -eq $Table)
+	{
+		$Table = New-Object System.Data.DataTable
+	}
+	
+	if ($InputObject -is [System.Data.DataTable])
+	{
+		$Table = $InputObject
+	}
+	elseif ($InputObject -is [System.Data.DataSet] -and $InputObject.Tables.Count -gt 0)
+	{
+		$Table = $InputObject.Tables[0]
+	}
+	else
+	{
+		if (-not $RetainColumns -or $Table.Columns.Count -eq 0)
+		{
+			#Clear out the Table Contents
+			$Table.Clear()
+			
+			if ($null -eq $InputObject) { return } #Empty Data
+			
+			$object = $null
+			#find the first non null value
+			foreach ($item in $InputObject)
+			{
+				if ($null -ne $item)
+				{
+					$object = $item
+					break
+				}
+			}
+			
+			if ($null -eq $object) { return } #All null then empty
+			
+			#Get all the properties in order to create the columns
+			foreach ($prop in $object.PSObject.Get_Properties())
+			{
+				if (-not $FilterWMIProperties -or -not $prop.Name.StartsWith('__')) #filter out WMI properties
+				{
+					#Get the type from the Definition string
+					$type = $null
+					
+					if ($null -ne $prop.Value)
+					{
+						try { $type = $prop.Value.GetType() }
+						catch { Out-Null }
+					}
+					
+					if ($null -ne $type) # -and [System.Type]::GetTypeCode($type) -ne 'Object')
+					{
+						[void]$table.Columns.Add($prop.Name, $type)
+					}
+					else #Type info not found
+					{
+						[void]$table.Columns.Add($prop.Name)
+					}
+				}
+			}
+			
+			if ($object -is [System.Data.DataRow])
+			{
+				foreach ($item in $InputObject)
+				{
+					$Table.Rows.Add($item)
+				}
+				return @( ,$Table)
+			}
+		}
+		else
+		{
+			$Table.Rows.Clear()
+		}
+		
+		foreach ($item in $InputObject)
+		{
+			$row = $table.NewRow()
+			
+			if ($item)
+			{
+				foreach ($prop in $item.PSObject.Get_Properties())
+				{
+					if ($table.Columns.Contains($prop.Name))
+					{
+						$row.Item($prop.Name) = $prop.Value
+					}
+				}
+			}
+			[void]$table.Rows.Add($row)
+		}
+	}
+	
+	return @( ,$Table)
+}
+#endregion
+
+$formSelectDatastore_Load = {
+	
+	$datastores = Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name | ?{ $_.State -eq 'Available' } | select Name, FreeSpaceGB, CapacityGB | Sort-Object -Property Name
+	
+	#$datastoreClusters = Get-DatastoreCluster -Server $global:vcenterConnection.Name
+	
+	#$datastores | Export-Csv "$ScriptDirectory\export.csv" -NoTypeInformation
+	
+	$table = ConvertTo-DataTable -InputObject $datastores
+	
+	Update-DataGridView -DataGridView $datagridviewDatastores -Item $table -AutoSizeColumns DisplayedCells
+	
+	foreach ($row in $datagridviewDatastores.Rows)
+	{
+		$percentFree = (($row.Cells[1].Value)/($row.Cells[2].Value) * 100)
+		
+		if ($percentFree -lt 10)
+		{
+			$row.DefaultCellStyle.BackColor = 'Red'
+		}
+		elseif (($percentFree -lt 20) -and ($percentFree -gt 10))
+		{
+			$row.DefaultCellStyle.BackColor = 'Yellow'
+		}
+	}
+	
+}
+
+$buttonExit_Click={
+	#TODO: Place custom script here
+	$formSelectDatastore.Close()
+}
+
+$buttonLoad_Click= {
+	#TODO: Place custom script here
+	#	---------------------------------
+	#	Sample Code to Load Grid
+	#	---------------------------------
+	#	$processes = Get-WmiObject Win32_Process -Namespace "Root\CIMV2"
+	#	Update-DataGridView -DataGridView $datagridviewResults -Item $processes -AutoSizeColumns DisplayedCells
+	#	---------------------------------
+	#	Sample Code to Load Sortable Data
+	#	---------------------------------
+	# 	$processes = Get-WmiObject Win32_Process -Namespace "Root\CIMV2"
+	#	$table = ConvertTo-DataTable -InputObject $processes -FilterWMIProperties
+	#	Update-DataGridView -DataGridView $datagridviewResults -Item $table -AutoSizeColumns DisplayedCells
+	
+
+	
+}
+
+$datagridviewDatastores_ColumnHeaderMouseClick=[System.Windows.Forms.DataGridViewCellMouseEventHandler]{
+#Event Argument: $_ = [System.Windows.Forms.DataGridViewCellMouseEventArgs]
+	if($datagridviewDatastores.DataSource -is [System.Data.DataTable])
+	{
+		$column = $datagridviewDatastores.Columns[$_.ColumnIndex]
+		$direction = [System.ComponentModel.ListSortDirection]::Ascending
+		
+		if($column.HeaderCell.SortGlyphDirection -eq 'Descending')
+		{
+			$direction = [System.ComponentModel.ListSortDirection]::Descending
+		}
+
+		$datagridviewDatastores.Sort($datagridviewDatastores.Columns[$_.ColumnIndex], $direction)
+	}
+}
+
+$datagridviewDatastores_CellMouseDoubleClick=[System.Windows.Forms.DataGridViewCellMouseEventHandler]{
+#Event Argument: $_ = [System.Windows.Forms.DataGridViewCellMouseEventArgs]
+	
+	$dsCluster = (Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name -Name $datagridviewDatastores.CurrentRow.Cells[0].Value | Get-DatastoreCluster).Name
+	
+	if ($dsCluster)
+	{
+		$textboxDatastore.Text = $dsCluster
+	}
+	else
+	{
+		$textboxDatastore.Text = $datagridviewDatastores.CurrentRow.Cells[0].Value
+	}
+	
+	$buttonSelectTemplate.Enabled = $true
+	
+	$formSelectDatastore.Close()
+}
+]]></Code>
+  <Mode>0</Mode>
+  <Assemblies />
+</File>
