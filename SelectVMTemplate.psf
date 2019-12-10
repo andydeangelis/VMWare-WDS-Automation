@@ -675,11 +675,11 @@ $datagridviewTemplates_CellMouseDoubleClick=[System.Windows.Forms.DataGridViewCe
 	$textboxTemplateName.Text = $datagridviewTemplates.CurrentRow.Cells[0].Value
 	$textboxTemplateLocation.Text = $datagridviewTemplates.CurrentRow.Cells[1].Value
 	
-	$comboboxVSwitch.Enabled = $true
-	
 	$formSelectVMTemplate.Close()
 	
+	$comboboxVSwitch.Enabled = $true
 }
+
 ]]></Code>
   <Mode>1</Mode>
   <Assemblies />

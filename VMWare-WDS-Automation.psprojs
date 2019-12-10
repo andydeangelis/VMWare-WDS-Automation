@@ -3,7 +3,6 @@
   <FileID>9e329b64-f4ea-482a-8786-64b2151c8568</FileID>
   <OpenFolders>
     <Folder>Functions</Folder>
-    <Folder>Modules</Folder>
     <Folder>images</Folder>
   </OpenFolders>
   <OpenFiles>
@@ -15,5 +14,7 @@
     <File>DuplicateVM.psf</File>
     <File>AddVirtualDisk.psf</File>
     <File>SelectDatastore.psf</File>
+    <File>AddNicCard.psf</File>
+    <File>SelectVMTemplate.psf</File>
   </OpenFiles>
 </ProjectState>

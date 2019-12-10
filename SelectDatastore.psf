@@ -390,7 +390,17 @@ $formSelectDatastore_Load = {
 	
 	$dsList = @()
 	
-	$datastores = Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name | ?{ $_.State -eq 'Available' } | select Name, FreeSpaceGB, CapacityGB | Sort-Object -Property Name
+	$drsText = "DRS host automatically selected"
+	
+	if ($comboboxVMHost.Text -eq $drsText)
+	{
+		$tmpHost = (Get-Cluster $comboboxClusters.Text | Get-VMHost | Sort-Object | select -First 1)
+		$datastores = Get-Datastore -Host $tmpHost -Server $global:vcenterConnection.Name | ?{ $_.State -eq 'Available' } | select Name, FreeSpaceGB, CapacityGB | Sort-Object -Property Name
+	}
+	else
+	{
+		$datastores = Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name | ?{ $_.State -eq 'Available' } | select Name, FreeSpaceGB, CapacityGB | Sort-Object -Property Name
+	}
 	
 	foreach ($ds in $datastores)
 	{
@@ -464,11 +474,28 @@ $datagridviewDatastores_ColumnHeaderMouseClick=[System.Windows.Forms.DataGridVie
 $datagridviewDatastores_CellMouseDoubleClick=[System.Windows.Forms.DataGridViewCellMouseEventHandler]{
 #Event Argument: $_ = [System.Windows.Forms.DataGridViewCellMouseEventArgs]
 	
-	$dsCluster = (Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name -Name $datagridviewDatastores.CurrentRow.Cells[0].Value | Get-DatastoreCluster).Name
+	$drsText = "DRS host automatically selected"
+	
+	if ($comboboxVMHost.Text -eq $drsText)
+	{
+		$tmpHost = (Get-Cluster $comboboxClusters.Text | Get-VMHost | Sort-Object | select -First 1)
+		$dsCluster = Get-Datastore -Host $tmpHost -Server $global:vcenterConnection.Name -Name $datagridviewDatastores.CurrentRow.Cells[0].Value | Get-DatastoreCluster
+	}
+	else
+	{
+		$dsCluster = Get-Datastore -Host $comboboxVMHost.SelectedItem -Server $global:vcenterConnection.Name -Name $datagridviewDatastores.CurrentRow.Cells[0].Value | Get-DatastoreCluster
+	}
 	
 	if ($dsCluster)
 	{
-		$textboxDatastore.Text = $dsCluster
+		if ($dsCluster.SdrsAutomationLevel -ne "Disabled")
+		{
+			$textboxDatastore.Text = $dsCluster.Name
+		}
+		else
+		{
+			$textboxDatastore.Text = $datagridviewDatastores.CurrentRow.Cells[0].Value
+		}
 	}
 	else
 	{
