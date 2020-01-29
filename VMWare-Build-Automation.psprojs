@@ -6,15 +6,9 @@
     <Folder>images</Folder>
   </OpenFolders>
   <OpenFiles>
-    <File>Startup.pss</File>
-    <File>Globals.ps1</File>
     <File>MainForm.psf</File>
-    <File>AddLocalUsers.psf</File>
+    <File>Globals.ps1</File>
     <File>AddVMForm.psf</File>
-    <File>DuplicateVM.psf</File>
-    <File>AddVirtualDisk.psf</File>
-    <File>SelectDatastore.psf</File>
-    <File>AddNicCard.psf</File>
     <File>SelectVMTemplate.psf</File>
   </OpenFiles>
 </ProjectState>

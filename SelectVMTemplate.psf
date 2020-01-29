@@ -445,7 +445,7 @@ $formSelectVMTemplate_Load={
 		}
 	}
 	
-	<#
+	
 	$contLibTemplates = (Get-ContentLibraryItem -Server $global:vcenterConnection.Name -ErrorAction SilentlyContinue | ?{ ($_.ItemType -eq "ovf") -or ($_.ItemType -eq "ova") })
 	
 	if ($contLibTemplates)
@@ -459,7 +459,7 @@ $formSelectVMTemplate_Load={
 			$templates = [System.Array]$templates + $object2
 		}
 	}
-	/#>
+	
 	#$templates = [System.Array]$templates + $object
 	
 	$templates = $templates | Sort-Object Name

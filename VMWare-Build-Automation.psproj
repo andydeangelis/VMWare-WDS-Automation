@@ -27,7 +27,6 @@
     <File Build="0" ReferenceFunction="Show-AddNicCard_psf">AddNicCard.psf</File>
     <File Build="0" ReferenceFunction="Show-SetHostname_psf">SetHostname.psf</File>
     <File Build="0" ReferenceFunction="Show-RenameAdminAccount_psf">RenameAdminAccount.psf</File>
-    <File Build="0" Shared="False" ReferenceFunction="Invoke-ActivateWindows_ps1">Functions\ActivateWindows.ps1</File>
     <File Build="0" ReferenceFunction="Show-EnterRetailKey_psf">EnterRetailKey.psf</File>
     <File Build="0" Shared="False" ReferenceFunction="Invoke-Get-WebRequestTable_ps1">Functions\Get-WebRequestTable.ps1</File>
     <File Build="0" ReferenceFunction="Show-EnterKMSKey_psf">EnterKMSKey.psf</File>

@@ -42,10 +42,27 @@ $logGUID = New-Guid
 if (-not (Get-Item -Path $logGUID)) { New-Item -ItemType Directory -Path "$logParentDirectory" -Name $logGUID}
 
 #Credential object for vCenter authentication.
-$vcCredential = $null
+if (Get-Item -Path "$($env:TEMP)\vcCreds.xml")
+{
+	$vcCredential = Import-Clixml -Path "$($env:TEMP)\vcCreds.xml"
+}
+else
+{
+	$vcCredential = $null
+}
 
 #vCenter connection object.
 $vcenterConnection = $null
+
+#vCenter Server Name
+if (Get-Item -Path "$($env:TEMP)\vcServer.xml")
+{
+	$vcServer = Import-Clixml -Path "$($env:TEMP)\vcServer.xml"
+}
+else
+{
+	$vcServer = $null
+}
 
 #VM build queue
 $vmbuilds = [System.Collections.ArrayList]@()
